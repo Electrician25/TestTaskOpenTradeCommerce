@@ -4,6 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddRouting();
 builder.Services.AddServices();
+builder.AddDatabaseContext();
 
 var app = builder.Build();
 app.UseRouting();

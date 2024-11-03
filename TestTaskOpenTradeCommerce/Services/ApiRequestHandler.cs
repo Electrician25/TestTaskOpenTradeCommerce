@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using DatabaseCore.DAL.Entities;
+using Newtonsoft.Json;
 using System.Net.Http.Headers;
-using TestTaskOpenTradeCommerce.Entities;
 using TestTaskOpenTradeCommerce.Interfaces;
 
 namespace TestTaskOpenTradeCommerce.Services
@@ -11,7 +11,7 @@ namespace TestTaskOpenTradeCommerce.Services
         private const string ApiHost = "rapid-translate-multi-traduction.p.rapidapi.com";
         private const string ApiLink = "https://rapid-translate-multi-traduction.p.rapidapi.com/t";
 
-        async public Task<string> SendRequestAsync(TranslationEntity translationEntity)
+        async public Task<string> SendRequestAndGetResponseAsync(Translation translationEntity)
         {
             var jsonContent = JsonConvert.SerializeObject(translationEntity);
             var client = new HttpClient();

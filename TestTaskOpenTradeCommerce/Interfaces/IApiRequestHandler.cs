@@ -1,9 +1,9 @@
-﻿using TestTaskOpenTradeCommerce.Entities;
+﻿using DatabaseCore.DAL.Entities;
 
 namespace TestTaskOpenTradeCommerce.Interfaces
 {
     public interface IApiRequestHandler
     {
-        public Task<string> SendRequestAsync(TranslationEntity translationEntity);
+        public Task<string> SendRequestAndGetResponseAsync(Translation translationEntity);
     }
 }

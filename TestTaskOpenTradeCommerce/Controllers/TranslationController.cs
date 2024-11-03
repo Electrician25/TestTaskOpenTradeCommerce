@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using TestTaskOpenTradeCommerce.Entities;
+﻿using DatabaseCore.DAL.Entities;
+using Microsoft.AspNetCore.Mvc;
 using TestTaskOpenTradeCommerce.Interfaces;
 
 namespace TestTaskOpenTradeCommerce.Controllers
@@ -11,11 +11,11 @@ namespace TestTaskOpenTradeCommerce.Controllers
         IApiRequestHandler apiRequestSenderService) : ControllerBase
     {
         [HttpPost("TranslateText")]
-        async public Task<TranslationEntity> GetTranslationAsync(
-            [FromBody] TranslationEntity translationEntity)
+        async public Task<Translation> GetTranslationAsync(
+            [FromBody] Translation translationEntity)
         {
-            var requestResult = await apiRequestSenderService.SendRequestAsync(translationEntity);
-            return await translationService.GetTranslationServiceAsync(translationEntity, requestResult);
+            var requestResult = await apiRequestSenderService.SendRequestAndGetResponseAsync(translationEntity);
+            return await translationService.GetAndSaveTranslationInfo(translationEntity, requestResult);
         }
     }
 }
