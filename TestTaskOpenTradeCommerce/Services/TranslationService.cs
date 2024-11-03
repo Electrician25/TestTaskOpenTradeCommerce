@@ -1,14 +1,18 @@
-﻿using TestTaskOpenTradeCommerce.Entities;
+﻿using DatabaseCore.DAL.Entities;
+using DatabaseCore.DAL.EntityFramework.DatabaseContext;
 using TestTaskOpenTradeCommerce.Interfaces;
 
 namespace TestTaskOpenTradeCommerce.Services
 {
-    public class TranslationService : ITranslationService
+    public class TranslationService(
+        ApplicationDatabaseContext applicationDatabaseContext) : ITranslationService
     {
-        public async Task<TranslationEntity> GetTranslationServiceAsync(
-            TranslationEntity translationEntity, string requestResult)
+        public async Task<Translation> GetAndSaveTranslationInfo(
+            Translation translationEntity, string requestResult)
         {
-
+            translationEntity.OutputText = requestResult;
+            var translationInfo = await applicationDatabaseContext.AddAsync(translationEntity);
+            await applicationDatabaseContext.SaveChangesAsync();
             return translationEntity;
         }
     }

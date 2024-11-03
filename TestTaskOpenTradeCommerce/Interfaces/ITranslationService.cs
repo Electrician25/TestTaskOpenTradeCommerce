@@ -1,9 +1,9 @@
-﻿using TestTaskOpenTradeCommerce.Entities;
+﻿using DatabaseCore.DAL.Entities;
 
 namespace TestTaskOpenTradeCommerce.Interfaces
 {
     public interface ITranslationService
     {
-        public Task<TranslationEntity> GetTranslationServiceAsync(TranslationEntity translationEntity, string requestResult);
+        public Task<Translation> GetAndSaveTranslationInfo(Translation translationEntity, string requestResult);
     }
 }
