@@ -19,12 +19,28 @@ namespace TestTaskOpenTradeCommerce.Controllers
         async public Task<List<TranslateJSONEntity>> GetNewTranslationAsync(
             [FromBody] List<TranslateJSONEntity> translationEntity)
         {
-            var requestResult = await apiRequestSenderService.
-                SendRequestAndGetResponseAsync(translationEntity);
             var translationByteaArray = await distributedCache.GetAsync("translation");
 
             if (translationByteaArray != null)
-                await distributedCache.RemoveAsync("translation");
+            {
+                var cahce = Encoding.UTF8.GetString(translationByteaArray);
+
+                foreach (var entity in translationEntity)
+                {
+                    if (cahce.Contains(entity.from)
+                        && cahce.Contains(entity.to)
+                        && cahce.Contains(entity.q))
+                    {
+                        return JsonConvert.DeserializeObject<List<TranslateJSONEntity>>(cahce);
+                    }
+
+                    else
+                        break;
+                }
+            }
+
+            var requestResult = await apiRequestSenderService.
+                SendRequestAndGetResponseAsync(translationEntity);
 
             var serilazationObject = JsonConvert.SerializeObject(requestResult);
 
@@ -32,7 +48,6 @@ namespace TestTaskOpenTradeCommerce.Controllers
                 Encoding.UTF8.GetBytes(serilazationObject));
 
             return requestResult;
-
         }
 
         [HttpGet("AllTranslations")]
