@@ -4,7 +4,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddRouting();
 builder.Services.AddServices();
-builder.AddDatabaseContext();
+
+ConfigurationManager configuration = builder.Configuration;
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = configuration["RedisCacheUrl"];
+});
 
 var app = builder.Build();
 app.UseRouting();

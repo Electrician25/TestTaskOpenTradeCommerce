@@ -3,13 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTaskOpenTradeCommerce", "TestTaskOpenTradeCommerce\TestTaskOpenTradeCommerce.csproj", "{E0C33FD3-B615-489A-BE40-0680C6A98906}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestTaskOpenTradeCommerce", "TestTaskOpenTradeCommerce\TestTaskOpenTradeCommerce.csproj", "{E0C33FD3-B615-489A-BE40-0680C6A98906}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseCore.DAL", "DatabaseCore.DAL\DatabaseCore.DAL.csproj", "{A1D04D19-43ED-4111-B060-946AF61798FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TranslationConsoleTerminal", "TranslationConsoleTerminal\TranslationConsoleTerminal.csproj", "{1EF7A404-D1D6-4349-BC60-A7F254ABFB96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TranslationConsoleTerminal", "TranslationConsoleTerminal\TranslationConsoleTerminal.csproj", "{1EF7A404-D1D6-4349-BC60-A7F254ABFB96}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{C246BAAD-ECCB-4C24-8B02-826439AF2B3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{C246BAAD-ECCB-4C24-8B02-826439AF2B3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +19,6 @@ Global
 		{E0C33FD3-B615-489A-BE40-0680C6A98906}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0C33FD3-B615-489A-BE40-0680C6A98906}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0C33FD3-B615-489A-BE40-0680C6A98906}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A1D04D19-43ED-4111-B060-946AF61798FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A1D04D19-43ED-4111-B060-946AF61798FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A1D04D19-43ED-4111-B060-946AF61798FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A1D04D19-43ED-4111-B060-946AF61798FF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1EF7A404-D1D6-4349-BC60-A7F254ABFB96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1EF7A404-D1D6-4349-BC60-A7F254ABFB96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EF7A404-D1D6-4349-BC60-A7F254ABFB96}.Release|Any CPU.ActiveCfg = Release|Any CPU

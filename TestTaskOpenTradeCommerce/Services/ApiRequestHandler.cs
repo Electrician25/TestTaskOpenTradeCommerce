@@ -1,42 +1,56 @@
-﻿using DatabaseCore.DAL.Entities;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.Net.Http.Headers;
+using TestTaskOpenTradeCommerce.Entities;
 using TestTaskOpenTradeCommerce.Interfaces;
+using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace TestTaskOpenTradeCommerce.Services
 {
     public class ApiRequestHandler : IApiRequestHandler
     {
-        private const string ApiKey = "fb24d672ebmsh17f3a5c9faa23b4p13710fjsn29986890dc78";
-        private const string ApiHost = "rapid-translate-multi-traduction.p.rapidapi.com";
-        private const string ApiLink = "https://rapid-translate-multi-traduction.p.rapidapi.com/t";
-
-        async public Task<string> SendRequestAndGetResponseAsync(Translation translationEntity)
+        async public Task<List<TranslateJSONEntity>> SendRequestAndGetResponseAsync(
+            List<TranslateJSONEntity> translationEntity)
         {
-            var jsonContent = JsonConvert.SerializeObject(translationEntity);
-            var client = new HttpClient();
-            var request = new HttpRequestMessage
+            var apiKey = ConfigurationManager.AppSettings.Get("ApiKey");
+
+            var apiHost = ConfigurationManager.AppSettings.Get("ApiHost");
+
+            var apiLink = ConfigurationManager.AppSettings.Get("ApiLink");
+
+            var result = new List<TranslateJSONEntity>();
+
+            foreach (var translate in translationEntity)
             {
-                Method = HttpMethod.Post,
-                RequestUri = new Uri(ApiLink),
-                Headers =
+                var jsonContent = JsonConvert.SerializeObject(translate);
+                var client = new HttpClient();
+                var request = new HttpRequestMessage
                 {
-                    { "x-rapidapi-key", ApiKey },
-                    { "x-rapidapi-host", ApiHost },
-                },
-                Content = new StringContent(jsonContent)
-                {
+                    Method = HttpMethod.Post,
+                    RequestUri = new Uri(apiLink),
                     Headers =
                     {
-                        ContentType = new MediaTypeHeaderValue("application/json")
+                        { "x-rapidapi-key", apiKey },
+                        { "x-rapidapi-host", apiHost },
+                    },
+                    Content = new StringContent(jsonContent)
+                    {
+                        Headers =
+                        {
+                            ContentType = new MediaTypeHeaderValue("application/json")
+                        }
                     }
-                }
-            };
+                };
 
-            var response = await client.SendAsync(request);
-            response.EnsureSuccessStatusCode();
+                var response = await client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
 
-            return await response.Content.ReadAsStringAsync();
+                var resultTranslation = await response.Content.ReadAsStringAsync();
+
+                translate.OutputText = resultTranslation;
+                result.Add(translate);
+            }
+
+            return result;
         }
     }
 }
