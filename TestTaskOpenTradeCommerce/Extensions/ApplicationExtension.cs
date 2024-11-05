@@ -7,7 +7,8 @@ namespace TestTaskOpenTradeCommerce.Extensions
     {
         public static IServiceCollection AddServices(this IServiceCollection serivce)
         {
-            return serivce.AddTransient<IApiRequestHandler, ApiRequestHandler>();
+            return serivce.AddTransient<IApiRequestHandler, ApiRequestHandler>()
+                .AddTransient<ITranslateCacheHandler, TranslateCacheHandler>();
         }
     }
 }
